@@ -73,10 +73,10 @@ const GameScreen = props => {
             <Text>Opponent's Guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
-                <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
+                <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'lower')}>
                     <MaterialCommunityIcons name="less-than" size={24} color="white" />
                 </MainButton>
-                <MainButton onPress={nextGuessHandler.bind(this, 'greater')}>
+                <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'greater')}>
                     <MaterialCommunityIcons name="greater-than" size={24} color="white" />
                 </MainButton>
             </Card>

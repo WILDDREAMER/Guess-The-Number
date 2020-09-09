@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import {
-    Text,
     StyleSheet,
     View,
-    Button,
     TouchableWithoutFeedback,
     Keyboard,
-    Alert
+    Alert,
+    Dimensions
 } from 'react-native'
 
 import Card from '../components/Card'
@@ -77,8 +76,8 @@ const StartGameScreen = props => {
                         value={enteredValue}
                     />
                     <View style={styles.buttonContainer}>
-                            <MainButton onPress={resetInputHandler} style={{backgroundColor:Colors.accent}}>Reset</MainButton>
-                            <MainButton onPress={confirmInputHnadler} style={{backgroundColor:Colors.primary}}>Confirm</MainButton>
+                            <MainButton Color={Colors.accent} onPress={resetInputHandler} >Reset</MainButton>
+                            <MainButton Color={Colors.primary} onPress={confirmInputHnadler} >Confirm</MainButton>
                     </View>
                 </Card>
                 {confirmedOutput}
@@ -102,8 +101,9 @@ const styles = StyleSheet.create({
     },
     inputContainer:
     {
-        width: 300,
-        maxWidth: '80%',
+        width: '80%',
+        minWidth:300,
+        maxWidth:'95%',
         alignItems: 'center',
     },
     buttonContainer:
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
     button:
     {
-        width: 90
+        width: Dimensions.get('window') /  2
     },
     input: {
         width: 50

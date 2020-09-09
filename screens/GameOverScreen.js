@@ -30,7 +30,7 @@ const GameOverScreen = props => {
                     <Text style={styles.highlight}>{props.userNumber}</Text>.
                 </BodyText>
             </Card>
-            <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
+            <MainButton Color={Colors.primary} onPress={props.onRestart}>NEW GAME</MainButton>
         </View>
     );
 };

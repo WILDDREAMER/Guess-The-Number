@@ -6,8 +6,8 @@ import colors from '../constants/colors';
 
 const MainButton = props => {
     return (
-        <TouchableOpacity activeOpacity={0.7} onPress={props.onPress}>
-            <View style={{...styles.button, ...props.style,  ...{backgroundColor:props.Color}}}>
+        <TouchableOpacity activeOpacity={0.7} onPress={props.onPress} style={{...styles.button, ...props.style,  ...{backgroundColor:props.Color}}}>
+            <View >
                 <Text style={styles.buttonText}>{props.children}</Text>
             </View>
         </TouchableOpacity>
@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
         // borderColor: 'white',
         // borderWidth:1,
         paddingVertical: 12,
-        paddingHorizontal: 30,
-        borderRadius:20,
+        paddingHorizontal: 10,
+        borderRadius:10,
+        alignItems:'center',
         // borderTopRightRadius:15,
         // borderBottomLeftRadius:15,
         // borderBottomRightRadius:15,

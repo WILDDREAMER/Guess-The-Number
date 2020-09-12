@@ -39,6 +39,8 @@ const GameScreen = props => {
     const initialGuess = generateRandomBetween(1, 100, props.userChoice);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
     const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()]);
+    const [availableDeviceWidth, setAvailableDeviceWidth] = useState(Dimensions.get('window').width)
+    const [availableDeviceHeight, setAvailableDeviceHeight] = useState(Dimensions.get('window').height)    
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
 
@@ -49,6 +51,19 @@ const GameScreen = props => {
             onGameOver(pastGuesses.length);
         }
     }, [currentGuess, userChoice, onGameOver]);
+
+    useEffect( () => {
+        const updateLayout = () => {
+            setAvailableDeviceHeight(Dimensions.get('window').height);
+            setAvailableDeviceWidth(Dimensions.get('window').width);
+        }
+
+        Dimensions.addEventListener('change', updateLayout);
+
+        return () => {
+            Dimensions.removeEventListener('change', updateLayout);
+        }
+    })
 
     const nextGuessHandler = direction => {
         if (
@@ -76,16 +91,38 @@ const GameScreen = props => {
         // setRounds(curRounds => curRounds + 1);
         setPastGuesses(curPastGuesses => [nextNumber.toString(), ...curPastGuesses]);
     };
-
+    if (availableDeviceHeight < 500)
+        return (
+            <View style={styles.screen}>
+                <Text>Opponent's Guess</Text>
+                <Card style={styles.controls}>
+                    <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'lower')}>
+                        <MaterialCommunityIcons name="less-than" size={24} color="white" />
+                    </MainButton>
+                    <NumberContainer>{currentGuess}</NumberContainer>
+                    <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'greater')}>
+                        <MaterialCommunityIcons name="greater-than" size={24} color="white" />
+                    </MainButton>
+                </Card>
+                <View style={styles.listContainer}>
+                    <FlatList
+                        keyExtractor={(item) => item}
+                        data={pastGuesses}
+                        renderItem={renderListItem.bind(this, pastGuesses.length)}
+                        contentContainerStyle={styles.list}
+                    />
+                </View>
+            </View>
+        )
     return (
         <View style={styles.screen}>
             <Text>Opponent's Guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
-                <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'lower')}>
+                <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'lower')} style={{width:'30%'}}>
                     <MaterialCommunityIcons name="less-than" size={24} color="white" />
                 </MainButton>
-                <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'greater')}>
+                <MainButton Color={Colors.primary} onPress={nextGuessHandler.bind(this, 'greater')} style={{width:'30%'}}>
                     <MaterialCommunityIcons name="greater-than" size={24} color="white" />
                 </MainButton>
             </Card>
@@ -113,9 +150,17 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: Dimensions.get('window').height > 600 ? 20 : 5 ,
+        marginTop: Dimensions.get('window').height > 600 ? 30 : 5,
         width: 300,
         maxWidth: '80%'
+    },
+    controls:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-around',
+        width:'80%',
+        marginVertical:Dimensions.get('window').height / 40,
+        height:Dimensions.get('window').height / 4,
     },
     listItem: {
         borderColor: '#ccc',

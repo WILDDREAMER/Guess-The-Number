@@ -9,6 +9,7 @@ import {
     Dimensions
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { ScreenOrientation } from 'expo';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';

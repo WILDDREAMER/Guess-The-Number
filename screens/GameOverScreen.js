@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Image, Button, Text, Dimensions, ScrollView } from 'react-native'
+import {
+    StyleSheet,
+    View,
+    Image,
+    Button,
+    Text,
+    Dimensions,
+    ScrollView,
+    SafeAreaView
+} from 'react-native'
 
 
 import BodyText from '../components/BodyText'
@@ -27,37 +36,39 @@ const GameOverScreen = props => {
     })
 
     return (
-        <ScrollView>
-            <View style={styles.screen}>
-                <TitleText>The Game Is Over!</TitleText>
-                <View style={{
-                    ...styles.imageContainer, ...{
-                        width: availableDeviceWidth * 0.6,
-                        height: availableDeviceWidth * 0.6,
-                        borderRadius: availableDeviceWidth * 0.6 / 2,
-                        marginVertical: availableDeviceHeight / 40
+        <SafeAreaView>
+            <ScrollView>
+                <View style={styles.screen}>
+                    <TitleText>The Game Is Over!</TitleText>
+                    <View style={{
+                        ...styles.imageContainer, ...{
+                            width: availableDeviceWidth * 0.6,
+                            height: availableDeviceWidth * 0.6,
+                            borderRadius: availableDeviceWidth * 0.6 / 2,
+                            marginVertical: availableDeviceHeight / 40
 
-                    }
-                }}>
-                    <Image
-                        // fadeDuration={1000}
-                        source={require('../assets/success.png')}
-                        // source={{uri: 'https://i.pinimg.com/originals/4f/6e/76/4f6e7646f881b63861e20f21b1c63cec.jpg'}}
-                        style={styles.image}
-                        resizeMode="cover"
-                    />
-                </View>
-                <Card style={{...styles.resultContainer, ...{marginVertical: availableDeviceHeight / 60,}}}>
-                    <BodyText style={{...styles.resultText, ...{fontSize: availableDeviceHeight > 600 ? 20 : 13}}}>
-                        Your phone needed{' '}
-                        <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds
+                        }
+                    }}>
+                        <Image
+                            // fadeDuration={1000}
+                            source={require('../assets/success.png')}
+                            // source={{uri: 'https://i.pinimg.com/originals/4f/6e/76/4f6e7646f881b63861e20f21b1c63cec.jpg'}}
+                            style={styles.image}
+                            resizeMode="cover"
+                        />
+                    </View>
+                    <Card style={{ ...styles.resultContainer, ...{ marginVertical: availableDeviceHeight / 60, } }}>
+                        <BodyText style={{ ...styles.resultText, ...{ fontSize: availableDeviceHeight > 600 ? 20 : 13 } }}>
+                            Your phone needed{' '}
+                            <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds
                     to guess the number{' '}
-                        <Text style={styles.highlight}>{props.userNumber}</Text>.
+                            <Text style={styles.highlight}>{props.userNumber}</Text>.
                 </BodyText>
-                </Card>
-                <MainButton Color={Colors.primary} onPress={props.onRestart}>NEW GAME</MainButton>
-            </View>
-        </ScrollView>
+                    </Card>
+                    <MainButton Color={Colors.primary} onPress={props.onRestart}>NEW GAME</MainButton>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 

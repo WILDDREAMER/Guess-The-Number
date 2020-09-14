@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
@@ -55,10 +55,10 @@ export default function App() {
       onRestart={configureNewGameHandler}
     />;
   return (
-    <View style={styles.screen}>
-      <Header title="Guess the number" />
-      {content}
-    </View>
+    <SafeAreaView style={styles.screen}>
+        <Header title="Guess the number" />
+        {content}
+    </SafeAreaView>
   )
 }
 
